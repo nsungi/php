@@ -1,0 +1,19 @@
+
+document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+  e.preventDefault(); // Prevent form submission
+
+  // Get form values
+  var name = document.getElementById('name').value;
+  var email = document.getElementById('email').value;
+  var date = document.getElementById('date').value;
+  var time = document.getElementById('time').value;
+  var message = document.getElementById('message').value;
+
+  // Perform validation or additional processing if needed
+ 
+
+  // Display a success message or redirect to a confirmation page
+  alert('Appointment booked successfully!');
+  // Alternatively, you can redirect to a confirmation page using:
+  // window.location.href = 'confirmation.html';
+});

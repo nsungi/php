@@ -1,0 +1,113 @@
+/*CSS Reset*/
+*{
+    margin:0px;
+    padding:0px;
+}
+/* Navigation bar styling*/
+
+/*Navbar image styling*/
+#navbar images{
+    display:block;
+    inline-size: 50px;
+    block-size:50px;
+    margin:auto;
+    margin-block-end: 3px;
+}
+
+/*Navbar Functionality*/
+.navbar{
+    display:flex;
+    block-size: 14vh;
+    inline-size: 100vw;
+    font-family: 'Ubuntu Mono', monospace;
+    margin-block-start:10px;
+   border: 2px solid black;
+   border-radius:15px; 
+   
+
+}
+
+
+/*Navbar content functionality*/
+
+
+/*Navbar content styling*/
+ul li{
+    list-style: none;
+    margin: 15px;
+    border-radius: 20px;
+    
+   
+}
+ul li a{
+    padding: 1px;
+    color:blue;
+    text-decoration: none;
+    border-radius:10px; 
+  
+   
+  
+}
+ul li a:hover{
+    background-color: rgb(176, 168, 168);
+    border-radius: 10px;
+}
+
+/* website background image designing */
+
+/* footer section */
+
+
+.footer {
+    min-block-size: 200px;
+    text-align: center;
+   
+    background-color: rgb(163, 163, 163);
+    
+   
+}
+
+
+/* End of footer section */
+
+
+/* key frames */
+@keyframes text_reveal_box {
+    50%{
+inline-size: 100%;
+inset-inline-start: 0;
+
+    }
+    100%{
+        inline-size: 0;
+        inset-inline-start: 100%;
+
+    }
+}
+
+@keyframes text_reveal{
+    100%{
+        color: white;
+
+    }
+}
+@keyframes text_reveal_name{
+    100%{
+        color: crimson;
+        font-weight: 500px;
+    }
+}
+
+/* end of keyframes */
+
+/* Media  Query for our Tablet*/
+@media only screen and (min-inline-size: 768px) {
+    .cta{
+        font-size: 2.5rem;
+        padding: 20px 60px;
+    }
+    h1.section-title{
+        font-size: 6rem;
+
+    }
+}

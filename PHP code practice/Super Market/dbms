@@ -1,0 +1,49 @@
+DROP DATABASE super_market;
+
+CREATE DATABASE super_market;
+
+use super_market;
+
+CREATE TABLE user (id INT(11) NOT NULL AUTO_INCREMENT ,
+                    userName VARCHAR(255) NOT NULL ,
+                    fName VARCHAR(255) NOT NULL ,
+                    lName VARCHAR(255) NOT NULL , 
+                    email VARCHAR(255) NOT NULL , 
+                    password VARCHAR(255) NOT NULL , 
+                    sex VARCHAR(5) NOT NULL ,
+                    category VARCHAR(255) NOT NULL,
+                    passport  VARCHAR(255) NOT NULL,
+                    PRIMARY KEY (id)
+                    );
+
+
+                    
+
+CREATE TABLE position (id INT(12) NOT NULL AUTO_INCREMENT ,
+               p_name VARCHAR(255) NOT NULL ,
+               PRIMARY KEY( id)
+               );
+
+               
+INSERT INTO `position` (`id`, `p_name`) VALUES ('1', 'Manager');
+INSERT INTO `position` (`id`, `p_name`) VALUES ('2', 'Aid');
+INSERT INTO `position` (`id`, `p_name`) VALUES ('3', 'Cashier');
+INSERT INTO `position` (`id`, `p_name`) VALUES ('4', 'Storekeeper');
+
+
+
+CREATE TABLE iterm(id int(11) auto_increment,
+                 Iterm_Name varchar(255) null,
+                 price varchar(255) null,
+                 unit varchar(255) not null,
+                 st_id int(11) not null,
+                 img varchar(255) not null,
+                   PRIMARY KEY(id),
+                 FOREIGN KEY (st_id) REFERENCES user(id) ON DELETE CASCADE ON UPDATE RESTRICT
+            );
+            
+CREATE TABLE sales( uid int(11) null,
+                 iterm_id int(11) null,
+              	time varchar(30) not null,
+                   PRIMARY KEY(uid, iterm_id)
+            );

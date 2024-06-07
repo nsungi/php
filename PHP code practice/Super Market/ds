@@ -1,0 +1,74 @@
+ <div class="comment">
+    <?php 
+    $csql = " SELECT content, Tm, username FROM feedback JOIN users ON feedback.uid = users.uid;";
+
+    SELECT * FROM product
+    INNER JOIN category ON product.categry_id= category.id
+    INNER JOIN units ON product.categry_id = units.id;
+
+      SELECT * FROM user INNER JOIN staffs  WHERE user.userName = ' Harun' AND user.password = '123456' 
+      OR staffs.userName = 'Harun' staffs.password = '123456' 
+
+
+
+
+    $cquer = mysqli_query($conn, $csql);
+
+    if (mysqli_num_rows($cquer) > 0){
+        $count = 0;
+
+        while( $d = mysqli_fetch_array($cquer)){
+
+            $count++;
+
+            ?>
+            <div class="comm">
+                
+                <h3><?php echo $d['username']; ?></h3>
+                
+                <ul>
+                    <?php foreach (explode(',',$d['Tm']) as $tm) { ?>
+
+                        <?php foreach(explode(',',$d['content']) as $comm){ ?>
+
+                            <li><?php echo $comm; ?> <p><?php echo $d['Tm']; ?></p></li>
+<hr>
+                            <?php } 
+                        } ?>
+                </ul>
+            </div>
+
+            <?php
+        }
+
+    }
+
+?>
+</div>
+
+
+<!--- photo  icon -->
+<i class="bi bi-person-bounding-box"></i>
+
+<!-- adding person --> 
+<i class="bi bi-person-plus-fill"></i>
+
+<!-- delete data ---> 
+<i class="bi bi-scissors"></i>
+<i class="bi bi-trash-fill"></i>
+
+<!-- watch for appointment --> 
+<i class="bi bi-watch"></i>
+<i class="bi bi-chat-right-text"></i>
+
+<!-- upload --> 
+<i class="bi bi-upload"></i>
+
+<!-- menu --> 
+<i class="bi bi-list-stars"></i>
+
+<!-- updat -->
+<i class="bi bi-arrow-down-up"></i>
+
+<!-- home --> 
+<i class="bi bi-house-fill"></i>

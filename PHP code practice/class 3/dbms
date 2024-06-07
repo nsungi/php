@@ -1,0 +1,118 @@
+
+-- Drop database if it exists
+DROP DATABASE IF EXISTS `university`;
+
+-- Create database `university` if not exists
+CREATE DATABASE IF NOT EXISTS `university`;
+
+-- Use `university` database
+USE `university`;
+
+-- Create `user` table
+CREATE TABLE `user` (
+  `userID` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) DEFAULT NULL,
+  `firstName` varchar(50) DEFAULT NULL,
+  `lastName` varchar(50) DEFAULT NULL,
+  `sex` char(1) DEFAULT NULL,
+  `role` varchar(100) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`userID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Create `program` table
+CREATE TABLE `program` (
+  `programID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`programID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Create `courses` table
+CREATE TABLE `courses` (
+  `courseID` int(11) NOT NULL AUTO_INCREMENT,
+  `courseName` varchar(100) DEFAULT NULL,
+  `credits` int(11) DEFAULT NULL,
+  PRIMARY KEY (`courseID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Create `professor_course` table
+CREATE TABLE `professor_course` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `professorID` int(11) DEFAULT NULL,
+  `courseID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `professorID` (`professorID`),
+  KEY `courseID` (`courseID`),
+  CONSTRAINT `professor_course_ibfk_1` FOREIGN KEY (`professorID`) REFERENCES `user` (`userID`) ON DELETE CASCADE,
+  CONSTRAINT `professor_course_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `courses` (`courseID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Create `student_program` table
+CREATE TABLE `student_program` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `studentID` int(11) DEFAULT NULL,
+  `programID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `studentID` (`studentID`),
+  KEY `programID` (`programID`),
+  CONSTRAINT `student_program_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `user` (`userID`) ON DELETE CASCADE,
+  CONSTRAINT `student_program_ibfk_2` FOREIGN KEY (`programID`) REFERENCES `program` (`programID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Create `student_marks` table
+CREATE TABLE `student_marks` (
+  `markID` int(11) NOT NULL AUTO_INCREMENT,
+  `studentID` int(11) DEFAULT NULL,
+  `professorCourse` int(11) DEFAULT NULL,
+  `grade` decimal(5,2) DEFAULT NULL,
+  PRIMARY KEY (`markID`),
+  KEY `studentID` (`studentID`),
+  KEY `professorCourse` (`professorCourse`),
+  CONSTRAINT `student_marks_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `user` (`userID`) ON DELETE CASCADE,
+  CONSTRAINT `student_marks_ibfk_2` FOREIGN KEY (`professorCourse`) REFERENCES `professor_course` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Insert data into `user` table
+INSERT INTO `user` (`email`, `firstName`, `lastName`, `sex`, `role`, `password`) VALUES 
+('rechrose@gmail.com', 'Rick', 'Rose', 'M', 'ADMIN', '12345'),
+('angel@gmail.com', 'Angle', 'Smith', 'F', 'STUDENT', '12345'),
+('kabugu@gmail.com', 'kabungu', 'Rodriguez', 'M', 'STUDENT', '12345'),
+('goddid@gmail.com', 'God', 'Did', 'M', 'TEACHER', '12345'),
+('available@gmail.com', 'available', 'Smith', 'M', 'STUDENT', '12345'),
+('oldeshool@gmail.com', 'olde', 'school', 'M', 'STUDENT', '12345'),
+('rege@gmail.com', 'Rege', 'Rege', 'M', 'STUDENT', '12345'),
+('machakula@gmail.com', 'machakula', 'machakula', 'F', 'STUDENT', '12345'),
+('mchele', 'Michele', 'Mchele', 'M', 'STUDENT', '12345'),
+('grace@gmail.com', 'Grace', 'grace', 'F', 'STUDENT', '12345');
+
+-- Insert data into `program` table
+INSERT INTO `program` (`name`, `code`) VALUES 
+('Information Communication Technology', 'ICT'),
+('Information Technology Communication', 'ITC');
+
+-- Insert data into `courses` table
+INSERT INTO `courses` (`courseName`, `credits`) VALUES
+('Introduction to Programming', 3),
+('Database Management System', 4),
+('Data Warehouse', 3),
+('Information Communication Technology with Business', 5),
+('Information Communication Technology', 5),
+('Information Communication', 4);
+
+-- Insert data into `professor_course` table
+INSERT INTO `professor_course` (`professorID`, `courseID`) VALUES
+(3, 2),
+(2, 3),
+(7, 1);
+
+-- Insert data into `student_program` table
+INSERT INTO `student_program` (`studentID`, `programID`) VALUES
+(2, 1),
+(4, 1);
+
+-- Insert data into `student_marks` table
+INSERT INTO `student_marks` (`studentID`, `professorCourse`, `grade`) VALUES
+(2, 3, 0.00),
+(4, 2, 0.00),
+(4, 3, 0.00);

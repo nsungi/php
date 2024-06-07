@@ -1,0 +1,305 @@
+
+CREATE TABLE `courses` (
+  `courseID` int(11) NOT NULL,
+  `courseName` varchar(100) DEFAULT NULL,
+  `credits` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `professor_course`
+--
+
+CREATE TABLE `professor_course` (
+  `id` int(11) NOT NULL,
+  `professorID` int(11) DEFAULT NULL,
+  `courseID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `program`
+--
+
+CREATE TABLE `program` (
+  `programID` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_marks`
+--
+
+CREATE TABLE `student_marks` (
+  `markID` int(11) NOT NULL,
+  `studentID` int(11) DEFAULT NULL,
+  `professorCourse` int(11) DEFAULT NULL,
+  `grade` decimal(5,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_program`
+--
+
+
+CREATE TABLE `student_program` (
+  `id` int(11) NOT NULL,
+  `studentID` int(11) DEFAULT NULL,
+  `programID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `userID` int(11) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `firstName` varchar(50) DEFAULT NULL,
+  `lastName` varchar(50) DEFAULT NULL,
+  `sex` char(1) DEFAULT NULL,
+  `role` varchar(100) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`courseID`);
+
+--
+-- Indexes for table `professor_course`
+--
+ALTER TABLE `professor_course`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `professorID` (`professorID`),
+  ADD KEY `courseID` (`courseID`);
+
+--
+-- Indexes for table `program`
+--
+ALTER TABLE `program`
+  ADD PRIMARY KEY (`programID`);
+
+--
+-- Indexes for table `student_marks`
+--
+ALTER TABLE `student_marks`
+  ADD PRIMARY KEY (`markID`),
+  ADD KEY `studentID` (`studentID`),
+  ADD KEY `professorCourse` (`professorCourse`);
+
+--
+-- Indexes for table `student_program`
+--
+ALTER TABLE `student_program`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `studentID` (`studentID`),
+  ADD KEY `programID` (`programID`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`userID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `courseID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `professor_course`
+--
+ALTER TABLE `professor_course`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `program`
+--
+ALTER TABLE `program`
+  MODIFY `programID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `student_marks`
+--
+ALTER TABLE `student_marks`
+  MODIFY `markID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `student_program`
+--
+ALTER TABLE `student_program`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `professor_course`
+--
+ALTER TABLE `professor_course`
+  ADD CONSTRAINT `professor_course_ibfk_1` FOREIGN KEY (`professorID`) REFERENCES `user` (`userID`),
+  ADD CONSTRAINT `professor_course_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `courses` (`courseID`);
+
+--
+-- Constraints for table `student_marks`
+--
+ALTER TABLE `student_marks`
+  ADD CONSTRAINT `student_marks_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `user` (`userID`),
+  ADD CONSTRAINT `student_marks_ibfk_2` FOREIGN KEY (`professorCourse`) REFERENCES `professor_course` (`id`);
+
+--
+-- Constraints for table `student_program`
+--
+ALTER TABLE `student_program`
+  ADD CONSTRAINT `student_program_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `user` (`userID`),
+  ADD CONSTRAINT `student_program_ibfk_2` FOREIGN KEY (`programID`) REFERENCES `program` (`programID`);
+COMMIT;
+
+
+-- INSERT DATA TO THE USER TABLES #########
+
+INSERT INTO `user` (`userID`, `email`, `firstName`, `lastName`, `sex`, `role`, `password`) VALUES 
+(NULL, 'rechrose@gmail.com', 'Rick', 'Rose', 'M', 'STUDENT', '12345');
+
+
+INSERT INTO `user` (`userID`, `email`, `firstName`, `lastName`, `sex`, `role`, `password`) VALUES 
+(NULL, 'angel@gmail.com', 'Angle', 'Smith', 'F', 'STUDENT', '12345');
+
+
+INSERT INTO `user` (`userID`, `email`, `firstName`, `lastName`, `sex`, `role`, `password`) VALUES 
+(NULL, 'kabugu@gmail.com', 'kabungu', 'Rodriguez', 'M', 'STUDENT', '12345');
+
+INSERT INTO `user` (`userID`, `email`, `firstName`, `lastName`, `sex`, `role`, `password`) VALUES 
+(NULL, 'goddid@gmail.com', 'God', 'Did', 'M', 'STUDENT', '12345');
+
+INSERT INTO `user` (`userID`, `email`, `firstName`, `lastName`, `sex`, `role`, `password`) VALUES 
+(NULL, 'available@gmail.com', 'available', 'Smith', 'M', 'STUDENT', '12345');
+
+INSERT INTO `user` (`userID`, `email`, `firstName`, `lastName`, `sex`, `role`, `password`) VALUES 
+(NULL, 'oldeshool@gmail.com', 'olde', 'school', 'M', 'STUDENT', '12345');
+
+INSERT INTO `user` (`userID`, `email`, `firstName`, `lastName`, `sex`, `role`, `password`) VALUES 
+(NULL, 'rege@gmail.com', 'Rege', 'Rege', 'M', 'STUDENT', '12345');
+
+INSERT INTO `user` (`userID`, `email`, `firstName`, `lastName`, `sex`, `role`, `password`) VALUES 
+(NULL, 'machakula@gmail.com', 'machakula ', 'machakula', 'F', 'STUDENT', '12345');
+
+INSERT INTO `user` (`userID`, `email`, `firstName`, `lastName`, `sex`, `role`, `password`) VALUES 
+(NULL, 'mchele', 'Michele', 'Mchele', 'M', 'STUDENT', '12345');
+
+INSERT INTO `user` (`userID`, `email`, `firstName`, `lastName`, `sex`, `role`, `password`) VALUES 
+(NULL, 'grace@gmail.com', 'Grace', 'grace', 'F', 'STUDENT', '12345');
+
+
+--- UPDATE FOR THE ROLE TO THE USER 
+
+-- UPDATE `user` SET `role` = 'TEACHER' WHERE `user`.`userID` = 25;
+
+-- join more than one tables
+-- SELECT u.userID, u.firstName, u.lastName, u.email, u.sex, u.role,
+--        sp.programID,
+--        c.courseID, c.courseName,
+--        sm.markID, sm.grade
+-- FROM user u
+-- LEFT JOIN student_program sp ON u.userID = sp.studentID
+-- LEFT JOIN student_marks sm ON u.userID = sm.studentID
+-- LEFT JOIN professor_course pc ON sm.professorCourse = pc.id
+-- LEFT JOIN courses c ON pc.courseID = c.courseID;
+
+
+---- join 2 table which is Professor & User 
+
+-- SELECT u.userID, u.firstName, u.lastName, u.email, u.sex, u.role,
+--        pc.courseID
+-- FROM user u
+-- JOIN professor_course pc ON u.userID = pc.professorID;
+
+-- -- #############################################################################################
+
+-- CREATE TABLE `courses` (
+--   `courseID` int(11) NOT NULL,
+--   `courseName` varchar(100) DEFAULT NULL,
+--   `credits` int(11) DEFAULT NULL,
+--   PRIMARY KEY (`courseID`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- CREATE TABLE `professor_course` (
+--   `id` int(11) NOT NULL,
+--   `professorID` int(11) DEFAULT NULL,
+--   `courseID` int(11) DEFAULT NULL,
+--   PRIMARY KEY (`id`),
+--   KEY `professorID` (`professorID`),
+--   KEY `courseID` (`courseID`),
+--   CONSTRAINT `professor_course_ibfk_1` FOREIGN KEY (`professorID`) REFERENCES `user` (`userID`) ON DELETE CASCADE,
+--   CONSTRAINT `professor_course_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `courses` (`courseID`) ON DELETE CASCADE
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- CREATE TABLE `program` (
+--   `programID` int(11) NOT NULL,
+--   `name` varchar(255) DEFAULT NULL,
+--   `code` varchar(255) DEFAULT NULL,
+--   PRIMARY KEY (`programID`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- CREATE TABLE `student_marks` (
+--   `markID` int(11) NOT NULL,
+--   `studentID` int(11) DEFAULT NULL,
+--   `professorCourse` int(11) DEFAULT NULL,
+--   `grade` decimal(5,2) DEFAULT NULL,
+--   PRIMARY KEY (`markID`),
+--   KEY `studentID` (`studentID`),
+--   KEY `professorCourse` (`professorCourse`),
+--   CONSTRAINT `student_marks_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `user` (`userID`) ON DELETE CASCADE,
+--   CONSTRAINT `student_marks_ibfk_2` FOREIGN KEY (`professorCourse`) REFERENCES `professor_course` (`id`) ON DELETE CASCADE
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- CREATE TABLE `student_program` (
+--   `id` int(11) NOT NULL,
+--   `studentID` int(11) DEFAULT NULL,
+--   `programID` int(11) DEFAULT NULL,
+--   PRIMARY KEY (`id`),
+--   KEY `studentID` (`studentID`),
+--   KEY `programID` (`programID`),
+--   CONSTRAINT `student_program_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `user` (`userID`) ON DELETE CASCADE,
+--   CONSTRAINT `student_program_ibfk_2` FOREIGN KEY (`programID`) REFERENCES `program` (`programID`) ON DELETE CASCADE
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- CREATE TABLE `user` (
+--   `userID` int(11) NOT NULL,
+--   `email` varchar(255) DEFAULT NULL,
+--   `firstName` varchar(50) DEFAULT NULL,
+--   `lastName` varchar(50) DEFAULT NULL,
+--   `sex` char(1) DEFAULT NULL,
+--   `role` varchar(100) DEFAULT NULL,
+--   `password` varchar(255) DEFAULT NULL,
+--   PRIMARY KEY (`userID`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ --#################################################################################

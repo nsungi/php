@@ -1,0 +1,26 @@
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: white;
+    background-image: linear-gradient("../assets/img/galarry/maize.jpg");
+    position: relative;
+    
+}
+
+.col-sm-8 {
+    background-color: white;
+    background-image: url("../maize.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.our {
+    color: red;
+}
+
+.ours {
+    background-image: url("../assets/img/galarry/align.jpg");
+}
